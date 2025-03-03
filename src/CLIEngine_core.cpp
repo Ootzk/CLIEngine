@@ -110,7 +110,7 @@ Sprite::Sprite(
 	this->back = back;
 }
 
-Color Sprite::char2Color(char c)
+Color char2Color(char c)
 {
 	switch (c)
 	{
