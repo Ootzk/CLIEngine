@@ -10,6 +10,7 @@ configure_file(
 )
 
 set(SOURCES
+    src/CLIEngine/choices.cpp
     src/CLIEngine/core.cpp
 )
 
@@ -44,4 +45,7 @@ if(BUILD_SAMPLES)
 
     add_executable(sample_colors src/samples/colors.cpp)
     target_link_libraries(sample_colors PRIVATE cli_engine)
+
+    add_executable(sample_choices src/samples/choices_transition.cpp)
+    target_link_libraries(sample_choices PRIVATE cli_engine)
 endif()
