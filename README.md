@@ -1,6 +1,6 @@
 # CLI Engine
 
-![Version](https://img.shields.io/badge/Version-v0.2.0-blue)
+![Version](https://img.shields.io/badge/Version-v0.3.0-blue)
 
 > Simple game engine that targets on CLI interface.
 
