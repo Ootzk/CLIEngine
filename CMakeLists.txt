@@ -23,20 +23,25 @@ target_include_directories(cli_engine
 add_library(CLIEngine::CLIEngine ALIAS cli_engine)
 
 # samples
-option(BUILD_SAMPLES "Build sample executables" ON)
+if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
+    option(BUILD_SAMPLES "Build sample executables" ON)
+else()
+    option(BUILD_SAMPLES "Build sample executables" OFF)
+endif()
+
 if(BUILD_SAMPLES)
-    add_executable(hello_CLIEngine src/samples/hello_CLIEngine.cpp)
-    target_link_libraries(hello_CLIEngine PRIVATE cli_engine)
+    add_executable(sample_hello_CLIEngine src/samples/hello_CLIEngine.cpp)
+    target_link_libraries(sample_hello_CLIEngine PRIVATE cli_engine)
 
-    add_executable(sprite_smile_face src/samples/sprite_smile_face.cpp)
-    target_link_libraries(sprite_smile_face PRIVATE cli_engine)
+    add_executable(sample_sprite_smile_face src/samples/sprite_smile_face.cpp)
+    target_link_libraries(sample_sprite_smile_face PRIVATE cli_engine)
 
-    add_executable(sprite_CLIEngine src/samples/sprite_CLIEngine.cpp)
-    target_link_libraries(sprite_CLIEngine PRIVATE cli_engine)
+    add_executable(sample_sprite_CLIEngine src/samples/sprite_CLIEngine.cpp)
+    target_link_libraries(sample_sprite_CLIEngine PRIVATE cli_engine)
 
-    add_executable(screen_transition src/samples/screen_transition.cpp)
-    target_link_libraries(screen_transition PRIVATE cli_engine)
+    add_executable(sample_screen_transition src/samples/screen_transition.cpp)
+    target_link_libraries(sample_screen_transition PRIVATE cli_engine)
 
-    add_executable(colors src/samples/colors.cpp)
-    target_link_libraries(colors PRIVATE cli_engine)
+    add_executable(sample_colors src/samples/colors.cpp)
+    target_link_libraries(sample_colors PRIVATE cli_engine)
 endif()
