@@ -1,4 +1,4 @@
-#include "CLIEngine_core.hpp"
+#include "CLIEngine/core.hpp"
 
 int main()
 {

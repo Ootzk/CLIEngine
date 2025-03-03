@@ -1,5 +1,4 @@
-#include "CLIEngine_core.hpp"
-#include "CLIEngine_screen.hpp"
+#include "CLIEngine/core.hpp"
 
 using ScreenPtr = std::shared_ptr<CLIEngine::Screen>;
 
