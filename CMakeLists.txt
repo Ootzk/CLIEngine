@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 set(CMAKE_CXX_STANDARD 17)
 
-project(CLIEngine VERSION 0.1.0 LANGUAGES CXX)
+project(CLIEngine VERSION 0.2.0 LANGUAGES CXX)
 
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/include/version.hpp.in"
