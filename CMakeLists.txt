@@ -10,8 +10,7 @@ configure_file(
 )
 
 set(SOURCES
-    src/CLIEngine_core.cpp
-    src/CLIEngine_screen.cpp
+    src/CLIEngine/core.cpp
 )
 
 add_library(cli_engine ${SOURCES})
