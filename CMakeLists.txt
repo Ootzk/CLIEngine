@@ -37,4 +37,7 @@ if(BUILD_SAMPLES)
 
     add_executable(screen_transition src/samples/screen_transition.cpp)
     target_link_libraries(screen_transition PRIVATE cli_engine)
+
+    add_executable(colors src/samples/colors.cpp)
+    target_link_libraries(colors PRIVATE cli_engine)
 endif()
