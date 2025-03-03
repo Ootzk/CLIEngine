@@ -14,6 +14,7 @@
 #include <iterator>
 #include <filesystem>
 #include <fstream>
+#include <memory>
 #include <optional>
 #include <random>
 #include <string>
@@ -86,6 +87,7 @@ enum class Color
 
 	DEFAULT      // ' ' (WHITE in foreground, BLACK in background)
 };
+Color char2Color(char c);
 
 void setPalette(Color foreground = Color::WHITE, Color background = Color::BLACK);
 
@@ -95,9 +97,6 @@ private:
 	std::vector<std::string> text;
 	std::vector<std::string> font;
 	std::vector<std::string> back;
-
-private:
-	static Color char2Color(char c);
 
 public:
 	Sprite(const std::vector<std::string>&, const std::vector<std::string>&, const std::vector<std::string>&);
