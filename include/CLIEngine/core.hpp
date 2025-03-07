@@ -101,7 +101,7 @@ private:
 
 public:
 	Sprite(const std::vector<std::string>&, const std::vector<std::string>&, const std::vector<std::string>&);
-	void draw(const Coordinate& offset = { 0, 0 });
+	void draw(const Coordinate& offset = { 0, 0 }) const;
 };
 
 enum class Direction

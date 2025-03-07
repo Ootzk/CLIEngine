@@ -88,28 +88,6 @@ void setPalette(Color foreground, Color background)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
 }
 
-Sprite::Sprite(
-	const std::vector<std::string>& text,
-	const std::vector<std::string>& font,
-	const std::vector<std::string>& back
-)
-{
-    const intP T = text.size();
-    const intP F = font.size();
-    const intP B = back.size();
-
-    if ((T != F) || (T != B) || (F != B)) {
-        throw std::runtime_error(
-            "text: " + std::to_string(text.size())\
-            + ", font: " + std::to_string(font.size())\
-            + ", back: " + std::to_string(back.size())
-        );
-    }
-    this->text = text;
-	this->font = font;
-	this->back = back;
-}
-
 Color char2Color(char c)
 {
 	switch (c)
@@ -134,7 +112,29 @@ Color char2Color(char c)
 	}
 }
 
-void Sprite::draw(const Coordinate& offset)
+Sprite::Sprite(
+	const std::vector<std::string>& text,
+	const std::vector<std::string>& font,
+	const std::vector<std::string>& back
+)
+{
+    const intP T = text.size();
+    const intP F = font.size();
+    const intP B = back.size();
+
+    if ((T != F) || (T != B) || (F != B)) {
+        throw std::runtime_error(
+            "text: " + std::to_string(text.size())\
+            + ", font: " + std::to_string(font.size())\
+            + ", back: " + std::to_string(back.size())
+        );
+    }
+    this->text = text;
+	this->font = font;
+	this->back = back;
+}
+
+void Sprite::draw(const Coordinate& offset) const
 {
     moveCursor(offset);
     for (intP i = 0; i < text.size(); ++i) {
