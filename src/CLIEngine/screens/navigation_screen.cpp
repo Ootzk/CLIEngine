@@ -26,7 +26,7 @@ std::optional<std::shared_ptr<CLIEngine::Screen>> NavigationScreen::input()
 void NavigationScreen::enter(const CLIEngine::ScreenTransition&)
 {
     clear();
-    choices.reset_cursor();
+    choices.reset();
 
     sprite.draw();
     choices.draw();
@@ -34,7 +34,7 @@ void NavigationScreen::enter(const CLIEngine::ScreenTransition&)
 
 void NavigationScreen::exit(const CLIEngine::ScreenTransition&)
 {
-    choices.reset_cursor();
+    choices.reset();
 }
 
 void NavigationScreen::draw()
