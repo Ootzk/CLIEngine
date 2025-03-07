@@ -14,7 +14,7 @@ Coordinate::~Coordinate()
 COORD Coordinate::to_COORD()
 {
 	COORD consoleCOORD;
-	consoleCOORD.X = 2 * x; consoleCOORD.Y = y;
+	consoleCOORD.X = x; consoleCOORD.Y = y;
 	return consoleCOORD;
 }
 bool Coordinate::operator==(const Coordinate& other) const
