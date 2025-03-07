@@ -51,25 +51,20 @@ public:
             this->probabilities.end(),
             this->probabilities.begin()
         );
-    
-        this->roll(); // initialize i
     }
 
-    void roll()
+    T roll()
     {
-        double r = this->distribution(this->engine);
-        for (intP i = 0; i < this->probabilities.size(); ++i) {
-            if (r <= this->probabilities[i]) {
-                this->current = i;
-                return;
+        double r = distribution(engine);
+        for (intP i = 0; i < probabilities.size(); ++i) {
+            if (r <= probabilities[i]) {
+                current = i;
+                return eyes[current];
             }
         }
-        this->current = this->probabilities.size();
-    }
-    
-    T get_result()
-    {
-        return this->eyes[this->current];
+        current = probabilities.size();
+
+        return eyes[current];
     }
     
     void draw(
@@ -79,14 +74,14 @@ public:
     {
         if (eye.has_value()) {
             intP eye_index = std::find(
-                this->eyes.begin(),
-                this->eyes.end(),
+                eyes.begin(),
+                eyes.end(),
                 eye.value()
-            ) - this->eyes.begin();
-            this->sprites[eye_index].draw(offset);
+            ) - eyes.begin();
+            sprites[eye_index].draw(offset);
         }
         else {
-            this->sprites[this->current].draw(offset);
+            sprites[current].draw(offset);
         }
     }
 };
