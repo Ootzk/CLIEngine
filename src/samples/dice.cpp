@@ -1,4 +1,4 @@
-#include "CLIEngine/dice.hpp"
+#include "CLIEngine/widgets/dice.hpp"
 
 int main()
 {

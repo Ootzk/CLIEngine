@@ -1,5 +1,5 @@
 #include "CLIEngine/core.hpp"
-#include "CLIEngine/choices.hpp"
+#include "CLIEngine/widgets/choices.hpp"
 
 class NavigationScreen : public CLIEngine::Screen
 {

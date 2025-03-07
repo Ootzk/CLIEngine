@@ -1,5 +1,5 @@
 #pragma once
-#include "core.hpp"
+#include "CLIEngine/core.hpp"
 
 // TODO: make global random engine (maybe Singleton?)
 // TODO: add Sprite (Animation?) for rolling
