@@ -89,8 +89,11 @@ enum class Color
 	DEFAULT      // ' ' (WHITE in foreground, BLACK in background)
 };
 Color char2Color(char c);
+Color intP2Color(intP i);
+std::string Color2str(Color color);
 
 void setPalette(Color foreground = Color::WHITE, Color background = Color::BLACK);
+std::pair<Color, Color> getPalette(Coordinate coordinate);
 
 class Sprite
 {

@@ -80,14 +80,6 @@ Key getKey()
 	return Key::NONE;
 }
 
-void setPalette(Color foreground, Color background)
-{
-	if (foreground == Color::DEFAULT) foreground = Color::WHITE;
-	if (background == Color::DEFAULT) background = Color::BLACK;
-	int colorCode = static_cast<int>(foreground) + static_cast<int>(background) * 16;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
-}
-
 Color char2Color(char c)
 {
 	switch (c)
@@ -110,6 +102,71 @@ Color char2Color(char c)
 	case 'W': return Color::WHITE;
 	default: return Color::DEFAULT;
 	}
+}
+
+Color intP2Color(intP i)
+{
+	switch(i)
+	{
+	case 0: return Color::BLACK;
+	case 1: return Color::BLUE;
+	case 2: return Color::GREEN;
+	case 3: return Color::CYAN;
+	case 4: return Color::RED;
+	case 5: return Color::PURPLE;
+	case 6: return Color::BROWN;
+	case 7: return Color::LIGHTGRAY;
+	case 8: return Color::DARKGRAY;
+	case 9: return Color::LIGHTBLUE;
+	case 10: return Color::LIGHTGREEN;
+	case 11: return Color::LIGHTCYAN;
+	case 12: return Color::LIGHTRED;
+	case 13: return Color::LIGHTPURPLE;
+	case 14: return Color::YELLOW;
+	case 15: return Color::WHITE;
+	default: return Color::DEFAULT;
+	}
+}
+
+std::string Color2str(Color color)
+{
+    switch(color)
+    {
+    case CLIEngine::Color::BLACK: return "black";
+    case CLIEngine::Color::BLUE: return "blue";
+    case CLIEngine::Color::GREEN: return "green";
+    case CLIEngine::Color::CYAN: return "cyan";
+    case CLIEngine::Color::RED: return "red";
+    case CLIEngine::Color::PURPLE: return "purple";
+    case CLIEngine::Color::BROWN: return "brown";
+    case CLIEngine::Color::LIGHTGRAY: return "lightgray";
+    case CLIEngine::Color::DARKGRAY: return "darkgray";
+    case CLIEngine::Color::LIGHTBLUE: return "lightblue";
+    case CLIEngine::Color::LIGHTGREEN: return "lightgreen";
+    case CLIEngine::Color::LIGHTCYAN: return "lightcyan";
+    case CLIEngine::Color::LIGHTRED: return "lightred";
+    case CLIEngine::Color::LIGHTPURPLE: return "lightpurple";
+    case CLIEngine::Color::YELLOW: return "yellow";
+    case CLIEngine::Color::WHITE: return "white";
+    default: return "?";
+    }
+}
+
+void setPalette(Color foreground, Color background)
+{
+	if (foreground == Color::DEFAULT) foreground = Color::WHITE;
+	if (background == Color::DEFAULT) background = Color::BLACK;
+	int colorCode = static_cast<int>(foreground) + static_cast<int>(background) * 16;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
+}
+
+std::pair<Color, Color> getPalette(Coordinate coordinate)
+{
+	WORD colorCode; DWORD numRead = 0;
+	ReadConsoleOutputAttribute(GetStdHandle(STD_OUTPUT_HANDLE), &colorCode, 1, coordinate.to_COORD(), &numRead);
+	Color background = intP2Color(static_cast<intP>(colorCode) / 16);
+	Color foreground = intP2Color(static_cast<intP>(colorCode) % 16);
+	return std::pair<Color, Color>{foreground, background};
 }
 
 Sprite::Sprite(
