@@ -97,15 +97,15 @@ int main()
     dice2.draw(CLIEngine::Coordinate{ 4, 2 }, 1);
     while (true) {
         if (CLIEngine::getKey() == CLIEngine::Key::SELECT) {
-            dice1.roll();
-            dice2.roll();
+            intP eye1 = dice1.roll();
+            intP eye2 = dice2.roll();
             
             dice1.draw(CLIEngine::Coordinate{ 0, 2 });
             dice2.draw(CLIEngine::Coordinate{ 4, 2 });
 
             CLIEngine::moveCursor({ 0, 5 });
-            std::cout << "dice 1: " << dice1.get_result() << endl;
-            std::cout << "dice 2: " << dice2.get_result() << endl;
+            std::cout << "dice 1: " << eye1 << endl;
+            std::cout << "dice 2: " << eye2 << endl;
         }
     }
 }
