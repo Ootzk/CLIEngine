@@ -16,66 +16,74 @@ int main()
             "WWWWWWW"
         }
     };
-
-    CLIEngine::Dice dice{
-        {"1", "2", "3", "4", "5", "6"},
+    std::vector<CLIEngine::Sprite> dice_common_sprites{
         {
             {
-                {
-                    "       ",
-                    "   *   ",
-                    "       "
-                },
-                dice_common_fontcolors,
-                dice_common_backgroundcolors
+                "       ",
+                "   *   ",
+                "       "
             },
-            {
-                {
-                    "       ",
-                    " *   * ",
-                    "       "
-                },
-                dice_common_fontcolors,
-                dice_common_backgroundcolors
-            },
-            {
-                {
-                    "   *   ",
-                    "   *   ",
-                    "   *   ",
-                },
-                dice_common_fontcolors,
-                dice_common_backgroundcolors
-            },
-            {
-                {
-                    " *   * ",
-                    "       ",
-                    " *   * "
-                },
-                dice_common_fontcolors,
-                dice_common_backgroundcolors
-            },
-            {
-                {
-                    " *   * ",
-                    "   *   ",
-                    " *   * "
-                },
-                dice_common_fontcolors,
-                dice_common_backgroundcolors
-            },
-            {
-                {
-                    " *   * ",
-                    " *   * ",
-                    " *   * "
-                },
-                dice_common_fontcolors,
-                dice_common_backgroundcolors
-            }
+            dice_common_fontcolors,
+            dice_common_backgroundcolors
         },
-        {1.0, 1.0, 1.0, 1.0, 1.0, 1.0}
+        {
+            {
+                "       ",
+                " *   * ",
+                "       "
+            },
+            dice_common_fontcolors,
+            dice_common_backgroundcolors
+        },
+        {
+            {
+                "   *   ",
+                "   *   ",
+                "   *   ",
+            },
+            dice_common_fontcolors,
+            dice_common_backgroundcolors
+        },
+        {
+            {
+                " *   * ",
+                "       ",
+                " *   * "
+            },
+            dice_common_fontcolors,
+            dice_common_backgroundcolors
+        },
+        {
+            {
+                " *   * ",
+                "   *   ",
+                " *   * "
+            },
+            dice_common_fontcolors,
+            dice_common_backgroundcolors
+        },
+        {
+            {
+                " *   * ",
+                " *   * ",
+                " *   * "
+            },
+            dice_common_fontcolors,
+            dice_common_backgroundcolors
+        }
+    };
+    std::vector<intP> eyes{1, 2, 3, 4, 5, 6};
+    std::vector<double> probabilities{1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+
+    CLIEngine::Dice<intP> dice1{
+        eyes,
+        dice_common_sprites,
+        probabilities
+    };
+    CLIEngine::Dice<intP> dice2{
+        eyes,
+        dice_common_sprites,
+        probabilities
     };
 
     // Hide Cursor
@@ -85,12 +93,19 @@ int main()
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &ConsoleCursor);
 
     std::cout << "Simple dice";
+    dice1.draw(CLIEngine::Coordinate{ 0, 2 }, 1);
+    dice2.draw(CLIEngine::Coordinate{ 4, 2 }, 1);
     while (true) {
-        dice.draw(CLIEngine::Coordinate{ 0, 2 });
-
         if (CLIEngine::getKey() == CLIEngine::Key::SELECT) {
-            dice.roll();
-            dice.draw(CLIEngine::Coordinate{ 0, 2 });
+            dice1.roll();
+            dice2.roll();
+            
+            dice1.draw(CLIEngine::Coordinate{ 0, 2 });
+            dice2.draw(CLIEngine::Coordinate{ 4, 2 });
+
+            CLIEngine::moveCursor({ 0, 5 });
+            std::cout << "dice 1: " << dice1.get_result() << endl;
+            std::cout << "dice 2: " << dice2.get_result() << endl;
         }
     }
 }

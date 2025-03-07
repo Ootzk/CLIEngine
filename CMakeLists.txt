@@ -12,7 +12,6 @@ configure_file(
 set(SOURCES
     src/CLIEngine/choices.cpp
     src/CLIEngine/core.cpp
-    src/CLIEngine/dice.cpp
 )
 
 add_library(cli_engine ${SOURCES})
@@ -50,6 +49,6 @@ if(BUILD_SAMPLES)
     add_executable(sample_choices src/samples/choices_transition.cpp)
     target_link_libraries(sample_choices PRIVATE cli_engine)
 
-    add_executable(dice src/samples/dice.cpp)
-    target_link_libraries(dice PRIVATE cli_engine)
+    add_executable(sample_dice src/samples/dice.cpp)
+    target_link_libraries(sample_dice PRIVATE cli_engine)
 endif()
