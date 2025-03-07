@@ -11,6 +11,7 @@ configure_file(
 
 set(SOURCES
     src/CLIEngine/core.cpp
+    src/CLIEngine/screens/navigation_screen.cpp
 )
 
 add_library(cli_engine ${SOURCES})
@@ -45,8 +46,8 @@ if(BUILD_SAMPLES)
     add_executable(sample_colors src/samples/colors.cpp)
     target_link_libraries(sample_colors PRIVATE cli_engine)
 
-    add_executable(sample_choices src/samples/choices_transition.cpp)
-    target_link_libraries(sample_choices PRIVATE cli_engine)
+    add_executable(sample_navigation_screen src/samples/navigation_screen.cpp)
+    target_link_libraries(sample_navigation_screen PRIVATE cli_engine)
 
     add_executable(sample_dice src/samples/dice.cpp)
     target_link_libraries(sample_dice PRIVATE cli_engine)

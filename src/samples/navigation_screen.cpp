@@ -1,62 +1,4 @@
-#include "CLIEngine/choices.hpp"
-
-class ChoosableScreen : public CLIEngine::Screen
-{
-private:
-    CLIEngine::Sprite sprite;
-    CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>> choices;
-
-public:
-    ChoosableScreen(
-        const std::string& name,
-        CLIEngine::Sprite sprite,
-        CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>> choices
-    ) : CLIEngine::Screen{name}, sprite(sprite), choices(choices) {}
-
-    void add_choice(
-        std::shared_ptr<CLIEngine::Screen> screen,
-        CLIEngine::Coordinate location,
-        CLIEngine::Sprite chosen_sprite,
-        CLIEngine::Sprite not_chosen_sprite
-    ) {
-        choices.add(screen, location, chosen_sprite, not_chosen_sprite);
-    }
-
-protected:
-    std::optional<std::shared_ptr<CLIEngine::Screen>> input() override {
-        return choices.input(CLIEngine::getKey());
-    }
-
-    void enter(const CLIEngine::ScreenTransition&) override {
-        clear();
-        choices.reset_cursor();
-
-        sprite.draw();
-        choices.draw();
-    }
-    void exit(const CLIEngine::ScreenTransition&) override {
-        choices.reset_cursor();
-    }
-
-    void draw() override {
-        choices.draw();
-    }
-
-    std::optional<CLIEngine::ScreenTransition> update() override {
-        std::optional<std::shared_ptr<CLIEngine::Screen>> future = input();
-        draw();
-        wait();
-
-        if (future.has_value()) {
-            return CLIEngine::ScreenTransition {
-                shared_from_this(),
-                future.value(),
-                {}
-            };
-        }
-        return std::nullopt;
-    }
-};
+#include "CLIEngine/screens/navigation_screen.hpp"
 
 int main()
 {
@@ -213,10 +155,10 @@ int main()
         }
     };
 
-    auto menu = std::make_shared<ChoosableScreen>("Menu", spriteMenu, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
-    auto C = std::make_shared<ChoosableScreen>("Screen_C", spriteC, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
-    auto L = std::make_shared<ChoosableScreen>("Screen_L", spriteL, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
-    auto I = std::make_shared<ChoosableScreen>("Screen_I", spriteI, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto menu = std::make_shared<NavigationScreen>("Menu", spriteMenu, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto C = std::make_shared<NavigationScreen>("Screen_C", spriteC, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto L = std::make_shared<NavigationScreen>("Screen_L", spriteL, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto I = std::make_shared<NavigationScreen>("Screen_I", spriteI, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
 
     menu->add_choice(
         C,
