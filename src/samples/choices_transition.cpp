@@ -4,13 +4,13 @@ class ChoosableScreen : public CLIEngine::Screen
 {
 private:
     CLIEngine::Sprite sprite;
-    CLIEngine::Choices choices;
+    CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>> choices;
 
 public:
     ChoosableScreen(
         const std::string& name,
         CLIEngine::Sprite sprite,
-        CLIEngine::Choices choices
+        CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>> choices
     ) : CLIEngine::Screen{name}, sprite(sprite), choices(choices) {}
 
     void add_choice(
@@ -213,10 +213,10 @@ int main()
         }
     };
 
-    auto menu = std::make_shared<ChoosableScreen>("Menu", spriteMenu, CLIEngine::Choices{});
-    auto C = std::make_shared<ChoosableScreen>("Screen_C", spriteC, CLIEngine::Choices{});
-    auto L = std::make_shared<ChoosableScreen>("Screen_L", spriteL, CLIEngine::Choices{});
-    auto I = std::make_shared<ChoosableScreen>("Screen_I", spriteI, CLIEngine::Choices{});
+    auto menu = std::make_shared<ChoosableScreen>("Menu", spriteMenu, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto C = std::make_shared<ChoosableScreen>("Screen_C", spriteC, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto L = std::make_shared<ChoosableScreen>("Screen_L", spriteL, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto I = std::make_shared<ChoosableScreen>("Screen_I", spriteI, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
 
     menu->add_choice(
         C,

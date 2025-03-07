@@ -10,7 +10,6 @@ configure_file(
 )
 
 set(SOURCES
-    src/CLIEngine/choices.cpp
     src/CLIEngine/core.cpp
 )
 
