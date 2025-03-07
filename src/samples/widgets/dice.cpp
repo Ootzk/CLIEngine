@@ -94,14 +94,14 @@ int main()
 
     std::cout << "Simple dice";
     dice1.draw(CLIEngine::Coordinate{ 0, 2 }, 1);
-    dice2.draw(CLIEngine::Coordinate{ 4, 2 }, 1);
+    dice2.draw(CLIEngine::Coordinate{ 8, 2 }, 1);
     while (true) {
         if (CLIEngine::getKey() == CLIEngine::Key::SELECT) {
             intP eye1 = dice1.roll();
             intP eye2 = dice2.roll();
             
             dice1.draw(CLIEngine::Coordinate{ 0, 2 });
-            dice2.draw(CLIEngine::Coordinate{ 4, 2 });
+            dice2.draw(CLIEngine::Coordinate{ 8, 2 });
 
             CLIEngine::moveCursor({ 0, 5 });
             std::cout << "dice 1: " << eye1 << endl;

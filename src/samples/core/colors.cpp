@@ -116,8 +116,7 @@ int main()
         }
     };
 
-    while (true) {
-        font_colors.draw();
-        background_colors.draw({16, 0});
-    }
+    font_colors.draw();
+    background_colors.draw({32, 0});
+    while(true) {}
 }

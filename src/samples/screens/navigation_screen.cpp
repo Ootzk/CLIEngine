@@ -1,3 +1,4 @@
+#include "CLIEngine/assets/logo.hpp"
 #include "CLIEngine/screens/navigation_screen.hpp"
 
 int main()
@@ -5,7 +6,7 @@ int main()
     CLIEngine::Sprite spriteMenu{
         {
             "      <sample>      ",
-            " CLIEngine::Choices ",
+            "  navigation_screen ",
             "                    ",
             "    choice screen   ",
             "                    ",
@@ -40,141 +41,27 @@ int main()
             "                    "
         }
     };
-    CLIEngine::Sprite spriteC{
-        {
-            " space bar: go back ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    "
-        },
-        {
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    "
-        },
-        {
-            "                    ",
-            "RRRRRRRRRRRRRRRRRRRR",
-            "RR                RR",
-            "R    RRRRRRRRRRR   R",
-            "R   RRRRRRRRRRRRRRRR",
-            "R   RRRRRRRRRRRRRRRR",
-            "R   RRRRRRRRRRRRRRRR",
-            "R    RRRRRRRRRRR   R",
-            "RR                RR",
-            "RRRRRRRRRRRRRRRRRRRR",
-        }
-    };
-    CLIEngine::Sprite spriteL{
-        {
-            " space bar: go back ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    "
-        },
-        {
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    "
-        },
-        {
-            "                    ",
-            "BBBBBBBBBBBBBBBBBBBB",
-            "BB    BBBBBBBBBBBBBB",
-            "BB    BBBBBBBBBBBBBB",
-            "BB    BBBBBBBBBBBBBB",
-            "BB    BBBBBBBBBBBBBB",
-            "BB    BBBBBBBBBBBBBB",
-            "BB    BBBBBBBBBBBBBB",
-            "BB                BB",
-            "BBBBBBBBBBBBBBBBBBBB",
-        }
-    };
-    CLIEngine::Sprite spriteI{
-        {
-            " space bar: go back ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    "
-        },
-        {
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    ",
-            "                    "
-        },
-        {
-            "                    ",
-            "GGGGGGGGGGGGGGGGGGGG",
-            "GGG              GGG",
-            "GGGGGGGG    GGGGGGGG",
-            "GGGGGGGG    GGGGGGGG",
-            "GGGGGGGG    GGGGGGGG",
-            "GGGGGGGG    GGGGGGGG",
-            "GGGGGGGG    GGGGGGGG",
-            "GGG              GGG",
-            "GGGGGGGGGGGGGGGGGGGG",
-        }
-    };
 
     auto menu = std::make_shared<NavigationScreen>("Menu", spriteMenu, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
-    auto C = std::make_shared<NavigationScreen>("Screen_C", spriteC, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
-    auto L = std::make_shared<NavigationScreen>("Screen_L", spriteL, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
-    auto I = std::make_shared<NavigationScreen>("Screen_I", spriteI, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto C = std::make_shared<NavigationScreen>("Screen_C", CLIEngine::Assets::sprite_logo_C, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto L = std::make_shared<NavigationScreen>("Screen_L", CLIEngine::Assets::sprite_logo_L, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
+    auto I = std::make_shared<NavigationScreen>("Screen_I", CLIEngine::Assets::sprite_logo_I, CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>>{});
 
     menu->add_choice(
         C,
-        CLIEngine::Coordinate{4, 5},
+        CLIEngine::Coordinate{8, 5},
         CLIEngine::Sprite{{"> C <"}, {"RRRRR"}, {"     "}},
         CLIEngine::Sprite{{"  C  "}, {"RRRRR"}, {"     "}}
     );
     menu->add_choice(
         L,
-        CLIEngine::Coordinate{4, 6},
+        CLIEngine::Coordinate{8, 6},
         CLIEngine::Sprite{{"> L <"}, {"BBBBB"}, {"     "}},
         CLIEngine::Sprite{{"  L  "}, {"BBBBB"}, {"     "}}
     );
     menu->add_choice(
         I,
-        CLIEngine::Coordinate{4, 7},
+        CLIEngine::Coordinate{8, 7},
         CLIEngine::Sprite{{"> I <"}, {"GGGGG"}, {"     "}},
         CLIEngine::Sprite{{"  I  "}, {"GGGGG"}, {"     "}}
     );
