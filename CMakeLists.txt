@@ -63,6 +63,10 @@ if(BUILD_SAMPLES)
     set(SAMPLES_WIDGETS "${CMAKE_BINARY_DIR}/samples/widgets")
     file(MAKE_DIRECTORY ${SAMPLES_WIDGETS})
 
+    add_executable(choices src/samples/widgets/choices.cpp)
+    target_link_libraries(choices PRIVATE cli_engine)
+    set_target_properties(choices PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
+
     add_executable(dice src/samples/widgets/dice.cpp)
     target_link_libraries(dice PRIVATE cli_engine)
     set_target_properties(dice PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
