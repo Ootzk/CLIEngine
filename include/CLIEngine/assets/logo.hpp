@@ -62,13 +62,13 @@ const CLIEngine::Sprite sprite_logo_C{
     },
     {
         "RRRRRRRRRRRRRRRRRRRR",
-        "RR                RR",
-        "R    RRRRRRRRRRR   R",
-        "R   RRRRRRRRRRRRRRRR",
-        "R   RRRRRRRRRRRRRRRR",
-        "R   RRRRRRRRRRRRRRRR",
-        "R    RRRRRRRRRRR   R",
-        "RR                RR",
+        "RRXXXXXXXXXXXXXXXXRR",
+        "RXXXXRRRRRRRRRRRXXXR",
+        "RXXXRRRRRRRRRRRRRRRR",
+        "RXXXRRRRRRRRRRRRRRRR",
+        "RXXXRRRRRRRRRRRRRRRR",
+        "RXXXXRRRRRRRRRRRXXXR",
+        "RRXXXXXXXXXXXXXXXXRR",
         "RRRRRRRRRRRRRRRRRRRR",
     }
 };
@@ -98,13 +98,13 @@ const CLIEngine::Sprite sprite_logo_L{
     },
     {
         "BBBBBBBBBBBBBBBBBBBB",
-        "BB   BBBBBBBBBBBBBBB",
-        "BB   BBBBBBBBBBBBBBB",
-        "BB   BBBBBBBBBBBBBBB",
-        "BB   BBBBBBBBBBBBBBB",
-        "BB   BBBBBBBBBBBBBBB",
-        "BB   BBBBBBBBBBBBBBB",
-        "BB                BB",
+        "BBXXXBBBBBBBBBBBBBBB",
+        "BBXXXBBBBBBBBBBBBBBB",
+        "BBXXXBBBBBBBBBBBBBBB",
+        "BBXXXBBBBBBBBBBBBBBB",
+        "BBXXXBBBBBBBBBBBBBBB",
+        "BBXXXBBBBBBBBBBBBBBB",
+        "BBXXXXXXXXXXXXXXXXBB",
         "BBBBBBBBBBBBBBBBBBBB",
     }
 };
@@ -134,13 +134,13 @@ const CLIEngine::Sprite sprite_logo_I{
     },
     {
         "GGGGGGGGGGGGGGGGGGGG",
-        "GGG              GGG",
-        "GGGGGGGGG   GGGGGGGG",
-        "GGGGGGGGG   GGGGGGGG",
-        "GGGGGGGGG   GGGGGGGG",
-        "GGGGGGGGG   GGGGGGGG",
-        "GGGGGGGGG   GGGGGGGG",
-        "GGG              GGG",
+        "GGGXXXXXXXXXXXXXXGGG",
+        "GGGGGGGGGXXXGGGGGGGG",
+        "GGGGGGGGGXXXGGGGGGGG",
+        "GGGGGGGGGXXXGGGGGGGG",
+        "GGGGGGGGGXXXGGGGGGGG",
+        "GGGGGGGGGXXXGGGGGGGG",
+        "GGGXXXXXXXXXXXXXXGGG",
         "GGGGGGGGGGGGGGGGGGGG",
     }
 };
