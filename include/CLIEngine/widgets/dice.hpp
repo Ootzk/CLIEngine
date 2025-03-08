@@ -84,6 +84,24 @@ public:
             sprites[current].draw(offset);
         }
     }
+
+    void changeText(char from, char to) {
+        for (auto& sprite : sprites) {
+            sprite.changeText(from, to);
+        }
+    }
+
+    void changeFontColor(CLIEngine::Color from, CLIEngine::Color to) {
+        for (auto& sprite : sprites) {
+            sprite.changeFontColor(from, to);
+        }
+    }
+
+    void changeBackColor(CLIEngine::Color from, CLIEngine::Color to) {
+        for (auto& sprite : sprites) {
+            sprite.changeBackColor(from, to);
+        }
+    }
 };
 
 }

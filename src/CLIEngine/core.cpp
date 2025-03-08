@@ -266,6 +266,15 @@ intP Sprite::height() const
     return text.size();
 }
 
+void Sprite::changeText(char from, char to)
+{
+	for (intP y = 0; y < text.size(); ++y) {
+		for (intP x = 0; x < text[y].size(); ++x) {
+			if (from == text[y][x]) text[y][x] = to;
+		}
+	}
+}
+
 void Sprite::changeFontColor(Color from, Color to)
 {
 	char f = Color2char(from);

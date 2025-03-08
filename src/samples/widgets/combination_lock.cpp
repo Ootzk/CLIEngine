@@ -11,7 +11,7 @@ int main()
             CLIEngine::Key::UP, CLIEngine::Key::DOWN, CLIEngine::Key::SELECT
         );
         for (intP i = 0; i < 10; ++i) {
-            digit->add(i, {10 * d + 1, 2}, CLIEngine::Assets::numbers_8x5_font1[i], {{}, {}, {}});
+            digit->add(i, {10 * d + 1, 2}, CLIEngine::Assets::sprites_arabicnumbers_8x5_font1[i], {{}, {}, {}});
         }
         
         lock.add(

@@ -108,6 +108,7 @@ public:
 	void draw(const Coordinate& offset = { 0, 0 }) const;
 	intP width() const;
 	intP height() const;
+	void changeText(char from, char to);
 	void changeFontColor(Color from, Color to);
 	void changeBackColor(Color from, Color to);
 };
