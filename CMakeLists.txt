@@ -10,8 +10,8 @@ configure_file(
 )
 
 set(SOURCES
-    src/CLIEngine/choices.cpp
     src/CLIEngine/core.cpp
+    src/CLIEngine/screens/navigation_screen.cpp
 )
 
 add_library(cli_engine ${SOURCES})
@@ -31,21 +31,47 @@ else()
 endif()
 
 if(BUILD_SAMPLES)
-    add_executable(sample_hello_CLIEngine src/samples/hello_CLIEngine.cpp)
-    target_link_libraries(sample_hello_CLIEngine PRIVATE cli_engine)
+# core
+    set(SAMPLES_CORE "${CMAKE_BINARY_DIR}/samples/core")
+    file(MAKE_DIRECTORY ${SAMPLES_CORE})
 
-    add_executable(sample_sprite_smile_face src/samples/sprite_smile_face.cpp)
-    target_link_libraries(sample_sprite_smile_face PRIVATE cli_engine)
+    add_executable(colors src/samples/core/colors.cpp)
+    target_link_libraries(colors PRIVATE cli_engine)
+    set_target_properties(colors PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
 
-    add_executable(sample_sprite_CLIEngine src/samples/sprite_CLIEngine.cpp)
-    target_link_libraries(sample_sprite_CLIEngine PRIVATE cli_engine)
+    add_executable(hello_CLIEngine src/samples/core/hello_CLIEngine.cpp)
+    target_link_libraries(hello_CLIEngine PRIVATE cli_engine)
+    set_target_properties(hello_CLIEngine PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
 
-    add_executable(sample_screen_transition src/samples/screen_transition.cpp)
-    target_link_libraries(sample_screen_transition PRIVATE cli_engine)
+    add_executable(sprite_CLIEngine src/samples/core/sprite_CLIEngine.cpp)
+    target_link_libraries(sprite_CLIEngine PRIVATE cli_engine)
+    set_target_properties(sprite_CLIEngine PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
 
-    add_executable(sample_colors src/samples/colors.cpp)
-    target_link_libraries(sample_colors PRIVATE cli_engine)
+    add_executable(sprite_smile_face src/samples/core/sprite_smile_face.cpp)
+    target_link_libraries(sprite_smile_face PRIVATE cli_engine)
+    set_target_properties(sprite_smile_face PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
 
-    add_executable(sample_choices src/samples/choices_transition.cpp)
-    target_link_libraries(sample_choices PRIVATE cli_engine)
+# screens
+    set(SAMPLES_SCREENS "${CMAKE_BINARY_DIR}/samples/screens")
+    file(MAKE_DIRECTORY ${SAMPLES_SCREENS})
+
+    add_executable(navigation_screen src/samples/screens/navigation_screen.cpp)
+    target_link_libraries(navigation_screen PRIVATE cli_engine)
+    set_target_properties(navigation_screen PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_SCREENS})
+
+# widgets
+    set(SAMPLES_WIDGETS "${CMAKE_BINARY_DIR}/samples/widgets")
+    file(MAKE_DIRECTORY ${SAMPLES_WIDGETS})
+
+    add_executable(choices src/samples/widgets/choices.cpp)
+    target_link_libraries(choices PRIVATE cli_engine)
+    set_target_properties(choices PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
+
+    add_executable(combination_lock src/samples/widgets/combination_lock.cpp)
+    target_link_libraries(combination_lock PRIVATE cli_engine)
+    set_target_properties(combination_lock PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
+
+    add_executable(dice src/samples/widgets/dice.cpp)
+    target_link_libraries(dice PRIVATE cli_engine)
+    set_target_properties(dice PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
 endif()

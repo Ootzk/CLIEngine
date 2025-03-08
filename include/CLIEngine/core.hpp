@@ -15,6 +15,7 @@
 #include <filesystem>
 #include <fstream>
 #include <memory>
+#include <numeric>
 #include <optional>
 #include <random>
 #include <string>
@@ -85,11 +86,15 @@ enum class Color
 	YELLOW,      // 'Y'
 	WHITE,       // 'W'
 
-	DEFAULT      // ' ' (WHITE in foreground, BLACK in background)
+	TRANS        // ' ' (transparent; avoid keyword)
 };
 Color char2Color(char c);
+char Color2char(Color color);
+Color intP2Color(intP i);
+std::string Color2str(Color color);
 
 void setPalette(Color foreground = Color::WHITE, Color background = Color::BLACK);
+std::pair<Color, Color> getPalette(Coordinate coordinate);
 
 class Sprite
 {
@@ -100,7 +105,12 @@ private:
 
 public:
 	Sprite(const std::vector<std::string>&, const std::vector<std::string>&, const std::vector<std::string>&);
-	void draw(const Coordinate& offset = { 0, 0 });
+	void draw(const Coordinate& offset = { 0, 0 }) const;
+	intP width() const;
+	intP height() const;
+	void changeText(char from, char to);
+	void changeFontColor(Color from, Color to);
+	void changeBackColor(Color from, Color to);
 };
 
 enum class Direction
