@@ -4,7 +4,7 @@ namespace CLIEngine {
 
 namespace Assets {
 
-const std::vector<CLIEngine::Sprite> numbers_8x5_font1{
+const std::vector<CLIEngine::Sprite> sprites_arabicnumbers_8x5_font1{
     { // 0
         {
             "        ",
@@ -233,6 +233,111 @@ const std::vector<CLIEngine::Sprite> numbers_8x5_font1{
             "WWXXXXXW",
             "WWWWWXXW",
             "WWXXXXWW"
+        }
+    }
+};
+
+const std::vector<CLIEngine::Sprite> sprites_diceeyes_7x3{
+    { // 1
+        {
+            "       ",
+            "   *   ",
+            "       "
+        },
+        {
+            "XXXXXXX",
+            "XXXXXXX",
+            "XXXXXXX"
+        },
+        {
+            "WWWWWWW",
+            "WWWWWWW",
+            "WWWWWWW"
+        }
+    },
+    { // 2
+        {
+            "       ",
+            " *   * ",
+            "       "
+        },
+        {
+            "XXXXXXX",
+            "XXXXXXX",
+            "XXXXXXX"
+        },
+        {
+            "WWWWWWW",
+            "WWWWWWW",
+            "WWWWWWW"
+        }
+    },
+    { // 3
+        {
+            "   *   ",
+            "   *   ",
+            "   *   ",
+        },
+        {
+            "XXXXXXX",
+            "XXXXXXX",
+            "XXXXXXX"
+        },
+        {
+            "WWWWWWW",
+            "WWWWWWW",
+            "WWWWWWW"
+        }
+    },
+    { // 4
+        {
+            " *   * ",
+            "       ",
+            " *   * "
+        },
+        {
+            "XXXXXXX",
+            "XXXXXXX",
+            "XXXXXXX"
+        },
+        {
+            "WWWWWWW",
+            "WWWWWWW",
+            "WWWWWWW"
+        }
+    },
+    { // 5
+        {
+            " *   * ",
+            "   *   ",
+            " *   * "
+        },
+        {
+            "XXXXXXX",
+            "XXXXXXX",
+            "XXXXXXX"
+        },
+        {
+            "WWWWWWW",
+            "WWWWWWW",
+            "WWWWWWW"
+        }
+    },
+    { // 6
+        {
+            " *   * ",
+            " *   * ",
+            " *   * "
+        },
+        {
+            "XXXXXXX",
+            "XXXXXXX",
+            "XXXXXXX"
+        },
+        {
+            "WWWWWWW",
+            "WWWWWWW",
+            "WWWWWWW"
         }
     }
 };
