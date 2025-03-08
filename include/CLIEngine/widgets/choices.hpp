@@ -51,7 +51,32 @@ public:
         previous = list.cend();
     }
 
-    T get()
+    Choices<T>& operator++() {
+        ++current;
+        if (current == list.cend()) {
+            current = list.cbegin();
+        }
+        return *this;
+    }
+
+    Choices<T>& operator--() {
+        if (current == list.cbegin()) {
+            current = list.cend();
+        }
+        --current;
+        return *this;
+    }
+
+    intP size() const {
+        return list.size();
+    }
+
+    intP index() const
+    {
+        return current - list.cbegin();
+    }
+
+    T get() const
     {
         return std::get<0>(*current);
     }
@@ -63,18 +88,12 @@ public:
         }
         else if (key == key_prev) {
             previous = current;
-            if (current == list.cbegin()) {
-                current = list.cend();
-            }
-            --current;
+            --(*this);
             return std::nullopt;
         }
         else if (key == key_next) {
             previous = current;
-            ++current;
-            if (current == list.cend()) {
-                current = list.cbegin();
-            }
+            ++(*this);
             return std::nullopt;
         }
         else {
