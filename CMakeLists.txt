@@ -67,6 +67,10 @@ if(BUILD_SAMPLES)
     target_link_libraries(choices PRIVATE cli_engine)
     set_target_properties(choices PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
 
+    add_executable(combination_lock src/samples/widgets/combination_lock.cpp)
+    target_link_libraries(combination_lock PRIVATE cli_engine)
+    set_target_properties(combination_lock PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
+
     add_executable(dice src/samples/widgets/dice.cpp)
     target_link_libraries(dice PRIVATE cli_engine)
     set_target_properties(dice PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_WIDGETS})
