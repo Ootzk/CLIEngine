@@ -104,6 +104,30 @@ Color char2Color(char c)
 	}
 }
 
+char Color2char(Color color)
+{
+    switch (color)
+	{
+	case Color::BLACK: return 'X';
+	case Color::BLUE: return 'B';
+	case Color::GREEN: return 'G';
+	case Color::CYAN: return 'C';
+	case Color::RED: return 'R';
+	case Color::PURPLE: return 'P';
+	case Color::BROWN: return 'O';
+	case Color::LIGHTGRAY: return 'a';
+	case Color::DARKGRAY: return 'A';
+	case Color::LIGHTBLUE: return 'b';
+	case Color::LIGHTGREEN: return 'g';
+	case Color::LIGHTCYAN: return 'c';
+	case Color::LIGHTRED: return 'r';
+	case Color::LIGHTPURPLE: return 'p';
+	case Color::YELLOW: return 'Y';
+	case Color::WHITE: return 'W';
+	default: return ' ';
+	}
+}
+
 Color intP2Color(intP i)
 {
 	switch(i)
@@ -215,6 +239,7 @@ void Sprite::draw(const Coordinate& offset) const
 			if (background == Color::TRANS) {
 				background = std::get<1>(getPalette(offset + Coordinate{x, y}));
 			}
+			// BUG: what if text exists in TRANS?
 
             setPalette(foreground, background);
             std::cout << t;
@@ -223,6 +248,46 @@ void Sprite::draw(const Coordinate& offset) const
     }
     setPalette();
     moveCursor(offset);
+}
+
+intP Sprite::width() const
+{
+    return std::max_element(
+		text.begin(),
+		text.end(),
+		[](const std::string& a, const std::string& b){ 
+			return a.size() < b.size(); 
+		}
+	)->size();
+}
+
+intP Sprite::height() const
+{
+    return text.size();
+}
+
+void Sprite::changeFontColor(Color from, Color to)
+{
+	char f = Color2char(from);
+	char t = Color2char(to);
+
+	for (intP y = 0; y < font.size(); ++y) {
+		for (intP x = 0; x < font[y].size(); ++x) {
+			if (f == font[y][x]) font[y][x] = t;
+		}
+	}
+}
+
+void Sprite::changeBackColor(Color from, Color to)
+{
+	char f = Color2char(from);
+	char t = Color2char(to);
+
+	for (intP y = 0; y < back.size(); ++y) {
+		for (intP x = 0; x < back[y].size(); ++x) {
+			if (f == back[y][x]) back[y][x] = t;
+		}
+	}
 }
 
 Screen::Screen(const std::string& name) : name(name)

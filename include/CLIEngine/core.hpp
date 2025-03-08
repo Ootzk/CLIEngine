@@ -89,6 +89,7 @@ enum class Color
 	TRANS        // ' ' (transparent; avoid keyword)
 };
 Color char2Color(char c);
+char Color2char(Color color);
 Color intP2Color(intP i);
 std::string Color2str(Color color);
 
@@ -105,6 +106,10 @@ private:
 public:
 	Sprite(const std::vector<std::string>&, const std::vector<std::string>&, const std::vector<std::string>&);
 	void draw(const Coordinate& offset = { 0, 0 }) const;
+	intP width() const;
+	intP height() const;
+	void changeFontColor(Color from, Color to);
+	void changeBackColor(Color from, Color to);
 };
 
 enum class Direction
