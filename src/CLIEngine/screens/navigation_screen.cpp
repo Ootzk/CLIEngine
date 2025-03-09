@@ -1,5 +1,7 @@
 #include "CLIEngine/screens/navigation_screen.hpp"
 
+namespace CLIEngine {
+
 NavigationScreen::NavigationScreen(
     const std::string& name,
     CLIEngine::Sprite sprite,
@@ -56,4 +58,6 @@ std::optional<CLIEngine::ScreenTransition> NavigationScreen::update()
         };
     }
     return std::nullopt;
+}
+
 }

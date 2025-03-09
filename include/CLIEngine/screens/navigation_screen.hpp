@@ -1,9 +1,11 @@
 #include "CLIEngine/core.hpp"
 #include "CLIEngine/widgets/choices.hpp"
 
+namespace CLIEngine {
+
 class NavigationScreen : public CLIEngine::Screen
 {
-private:
+protected:
     CLIEngine::Sprite sprite;
     CLIEngine::Choices<std::shared_ptr<CLIEngine::Screen>> choices;
 
@@ -28,3 +30,5 @@ protected:
     void draw() override;
     std::optional<CLIEngine::ScreenTransition> update() override;
 };
+
+}
