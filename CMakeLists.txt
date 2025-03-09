@@ -12,6 +12,7 @@ configure_file(
 set(SOURCES
     src/CLIEngine/core.cpp
     src/CLIEngine/screens/navigation_screen.cpp
+    src/CLIEngine/utils.cpp
 )
 
 add_library(cli_engine ${SOURCES})
@@ -43,6 +44,10 @@ if(BUILD_SAMPLES)
     target_link_libraries(hello_CLIEngine PRIVATE cli_engine)
     set_target_properties(hello_CLIEngine PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
 
+    add_executable(textlayer_to_sprite src/samples/core/textlayer_to_sprite.cpp)
+    target_link_libraries(textlayer_to_sprite PRIVATE cli_engine)
+    set_target_properties(textlayer_to_sprite PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
+
     add_executable(sprite_CLIEngine src/samples/core/sprite_CLIEngine.cpp)
     target_link_libraries(sprite_CLIEngine PRIVATE cli_engine)
     set_target_properties(sprite_CLIEngine PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
@@ -50,6 +55,14 @@ if(BUILD_SAMPLES)
     add_executable(sprite_smile_face src/samples/core/sprite_smile_face.cpp)
     target_link_libraries(sprite_smile_face PRIVATE cli_engine)
     set_target_properties(sprite_smile_face PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLES_CORE})
+
+# utils
+    set(SAMPLE_UTILS "${CMAKE_BINARY_DIR}/samples/utils")
+    file(MAKE_DIRECTORY ${SAMPLE_UTILS})
+
+    add_executable(ascii_title_generator src/samples/utils/ascii_title_generator.cpp)
+    target_link_libraries(ascii_title_generator PRIVATE cli_engine)
+    set_target_properties(ascii_title_generator PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SAMPLE_UTILS})
 
 # screens
     set(SAMPLES_SCREENS "${CMAKE_BINARY_DIR}/samples/screens")

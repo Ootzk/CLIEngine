@@ -1,4 +1,4 @@
-#include "CLIEngine/assets/numbers.hpp"
+#include "CLIEngine/assets/dice.hpp"
 #include "CLIEngine/widgets/dice.hpp"
 
 CLIEngine::Dice<intP> make_dice(
@@ -7,12 +7,21 @@ CLIEngine::Dice<intP> make_dice(
 )
 {
     std::vector<intP> eyes{ 1, 2, 3, 4, 5, 6 };
-    auto sprites = CLIEngine::Assets::sprites_diceeyes_7x3;
     std::vector<double> probs{ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
-
+    std::vector<CLIEngine::Sprite> sprites;
+    for (intP eye : eyes) {
+        auto& textlayer = CLIEngine::Assets::standard_dice_eyes_7x3.find(eye)->second;
+        sprites.emplace_back(
+            textlayer.makeSprite(
+                {},
+                {{textlayer.mainframe(), eyecolor}},
+                {},
+                eyecolor,
+                bodycolor
+            )
+        );
+    }
     auto dice = CLIEngine::Dice<intP>(eyes, sprites, probs);
-    dice.changeFontColor(CLIEngine::Color::BLACK, eyecolor);
-    dice.changeBackColor(CLIEngine::Color::WHITE, bodycolor);
     return dice;
 }
 

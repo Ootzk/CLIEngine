@@ -195,13 +195,13 @@ std::pair<Color, Color> getPalette(Coordinate coordinate)
 	return std::pair<Color, Color>{foreground, background};
 }
 
-Sprite::Sprite(
+void Sprite::checkFormat(
 	const std::vector<std::string>& text,
 	const std::vector<std::string>& font,
 	const std::vector<std::string>& back
 )
 {
-    const intP T = text.size();
+	const intP T = text.size();
     const intP F = font.size();
     const intP B = back.size();
 
@@ -212,6 +212,16 @@ Sprite::Sprite(
             + ", back: " + std::to_string(back.size())
         );
     }
+}
+
+Sprite::Sprite(
+    const std::vector<std::string>& text,
+    const std::vector<std::string>& font,
+    const std::vector<std::string>& back
+)
+{
+	checkFormat(text, font, back);
+    
     this->text = text;
 	this->font = font;
 	this->back = back;
@@ -266,6 +276,52 @@ intP Sprite::height() const
     return text.size();
 }
 
+void Sprite::addPadding(Direction dir, intP count, char text, Color font, Color back)
+{
+	char t = text;
+	char f = Color2char(font);
+	char b = Color2char(back);
+
+	if (dir == Direction::UP || dir == Direction::DOWN) {
+		std::string T(this->width(), t);
+		std::string F(this->width(), f);
+		std::string B(this->width(), b);
+		
+		if (dir == Direction::UP) {
+			for (intP n = 0; n < count; ++n) {
+				this->text.emplace(this->text.begin(), T);
+				this->font.emplace(this->font.begin(), F);
+				this->back.emplace(this->back.begin(), B);
+			}
+		}
+		else {
+			for (intP n = 0; n < count; ++n) {
+				this->text.emplace_back(T);
+				this->font.emplace_back(F);
+				this->back.emplace_back(B);
+			}
+		}
+	}
+	else if (dir == Direction::LEFT || dir == Direction::RIGHT) {
+		for (intP y = 0; y < this->text.size(); ++y) {
+			std::string& T = this->text[y];
+			std::string& F = this->font[y];
+			std::string& B = this->back[y];
+
+			if (dir == Direction::LEFT) {
+				T.insert(T.begin(), count, t);
+				F.insert(F.begin(), count, f);
+				B.insert(B.begin(), count, b);
+			}
+			else {
+				T.append(count, t);
+				F.append(count, f);
+				B.append(count, b);
+			}
+		}
+	}
+}
+
 void Sprite::changeText(char from, char to)
 {
 	for (intP y = 0; y < text.size(); ++y) {
@@ -297,6 +353,66 @@ void Sprite::changeBackColor(Color from, Color to)
 			if (f == back[y][x]) back[y][x] = t;
 		}
 	}
+}
+
+TextLayer::TextLayer(
+	const std::vector<std::string>& textlayer,
+	char mainframe,
+	char background
+)
+	: std::vector<std::string>{textlayer}, mainframe_{mainframe}, background_{background}
+{
+}
+
+char TextLayer::mainframe() const
+{
+	return mainframe_;
+}
+
+char  TextLayer::background() const
+{
+	return background_;
+}
+
+Sprite TextLayer::makeSprite(
+	const std::unordered_map<char, char>& textmapping,
+	const std::unordered_map<char, Color>& fontmapping,
+	const std::unordered_map<char, Color>& backmapping,
+	Color fontdefault,
+	Color backdefault
+) const
+{
+	std::vector<std::string> text, font, back;
+	for (intP y = 0; y < (*this).size(); ++y) {
+		std::string T, F, B;
+		for (intP x = 0; x < (*this)[y].size(); ++x) {
+			char c = (*this)[y][x];
+
+			char t = c;
+			if (textmapping.find(c) != textmapping.end()) {
+				t = textmapping.at(c);
+			}
+
+			char f = Color2char(fontdefault);
+			if (fontmapping.find(c) != fontmapping.end()) {
+				f = Color2char(fontmapping.at(c));
+			}
+
+			char b = Color2char(backdefault);
+			if (backmapping.find(c) != backmapping.end()) {
+				b = Color2char(backmapping.at(c));
+			}
+
+			T += t;
+			F += f;
+			B += b;
+		}
+		text.push_back(T);
+		font.push_back(F);
+		back.push_back(B);
+	}
+
+	return Sprite{ text, font, back };
 }
 
 Screen::Screen(const std::string& name) : name(name)

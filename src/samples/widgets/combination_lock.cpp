@@ -1,4 +1,4 @@
-#include "CLIEngine/assets/numbers.hpp"
+#include "CLIEngine/assets/charset.hpp"
 #include "CLIEngine/widgets/choices.hpp"
 
 int main()
@@ -6,74 +6,40 @@ int main()
     CLIEngine::Choices<std::shared_ptr<CLIEngine::Choices<intP>>> lock{
         CLIEngine::Key::RIGHT, CLIEngine::Key::LEFT, CLIEngine::Key::SELECT
     };
+    CLIEngine::Coordinate offset{0, 2};
     for (intP d = 0; d < 4; ++d) {
         std::shared_ptr<CLIEngine::Choices<intP>> digit = std::make_shared<CLIEngine::Choices<intP>>(
             CLIEngine::Key::UP, CLIEngine::Key::DOWN, CLIEngine::Key::SELECT
         );
+        intP width;
         for (intP i = 0; i < 10; ++i) {
-            digit->add(i, {10 * d + 1, 2}, CLIEngine::Assets::sprites_arabicnumbers_8x5_font1[i], {{}, {}, {}});
+            auto& num = CLIEngine::Assets::alphabets_font1.find('0' + i)->second; // ex) '0' + 5 = '5'
+            auto sprite = num.makeSprite(
+                {{num.mainframe(), ' '}},
+                {},
+                {{num.mainframe(), CLIEngine::Color::BLACK}, {num.background(), CLIEngine::Color::WHITE}},
+                CLIEngine::Color::TRANS,
+                CLIEngine::Color::WHITE
+            );
+            sprite.addPadding(CLIEngine::Direction::LEFT, 1, ' ', CLIEngine::Color::TRANS, CLIEngine::Color::WHITE);
+            sprite.addPadding(CLIEngine::Direction::RIGHT, 1, ' ', CLIEngine::Color::TRANS, CLIEngine::Color::WHITE);
+
+            width = sprite.width();
+            digit->add(i, {width * d, 2}, sprite, {{}, {}, {}});
         }
         
         lock.add(
             digit,
-            {10 * d, 1},
+            {width * d, 1},
             {
-                {
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          "
-                },
-                {
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          "
-                },
-                {
-                    "GGGGGGGGGG",
-                    "G        G",
-                    "G        G",
-                    "G        G",
-                    "G        G",
-                    "G        G",
-                    "GGGGGGGGGG"
-                }
+                { std::string(width, ' ') },
+                { std::string(width, ' ') },
+                { std::string(width, 'G') },
             },
             {
-                {
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          "
-                },
-                {
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          ",
-                    "          "
-                },
-                {
-                    "XXXXXXXXXX",
-                    "X        X",
-                    "X        X",
-                    "X        X",
-                    "X        X",
-                    "X        X",
-                    "XXXXXXXXXX"
-                }
+                { std::string(width, ' ') },
+                { std::string(width, ' ') },
+                { std::string(width, 'X') },
             }
         );
     }

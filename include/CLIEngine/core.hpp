@@ -14,6 +14,7 @@
 #include <iterator>
 #include <filesystem>
 #include <fstream>
+#include <map>
 #include <memory>
 #include <numeric>
 #include <optional>
@@ -35,6 +36,14 @@ namespace CLIEngine {
 const int WINDOW_WIDTH = 79;
 const int WINDOW_HEIGHT = 42;
 const int FPS = 60;
+
+enum class Direction
+{
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN
+};
 
 //core components and related functions.
 struct Coordinate
@@ -103,22 +112,41 @@ private:
 	std::vector<std::string> font;
 	std::vector<std::string> back;
 
+private:
+	static void checkFormat(const std::vector<std::string>&, const std::vector<std::string>&, const std::vector<std::string>&);
+
 public:
 	Sprite(const std::vector<std::string>&, const std::vector<std::string>&, const std::vector<std::string>&);
 	void draw(const Coordinate& offset = { 0, 0 }) const;
 	intP width() const;
 	intP height() const;
+	void addPadding(Direction dir, intP count, char text = ' ', Color font = Color::TRANS, Color back = Color::TRANS);
 	void changeText(char from, char to);
 	void changeFontColor(Color from, Color to);
 	void changeBackColor(Color from, Color to);
 };
 
-enum class Direction
+class TextLayer : public std::vector<std::string>
 {
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN
+private:
+	char mainframe_;
+	char background_;
+
+public:
+	TextLayer(
+		const std::vector<std::string>& textlayer,
+		char mainframe = '#',
+		char background = ' '
+	);
+	char mainframe() const;
+	char background() const;
+	Sprite makeSprite(
+		const std::unordered_map<char, char>& textmapping,
+		const std::unordered_map<char, Color>& fontmapping,
+		const std::unordered_map<char, Color>& backmapping,
+		Color fontdefault = Color::BLACK,
+		Color backdefault = Color::TRANS
+	) const;
 };
 
 struct ScreenTransition; // forward declaration
