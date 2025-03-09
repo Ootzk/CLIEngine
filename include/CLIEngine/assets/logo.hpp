@@ -1,3 +1,4 @@
+#pragma once
 #include "CLIEngine/core.hpp"
 
 namespace CLIEngine {
